@@ -18,7 +18,7 @@ RUN apt-get -qq update && \
 RUN wget https://johnvansickle.com/ffmpeg/builds/ffmpeg-git-amd64-static.tar.xz && \
     tar xvf ffmpeg*.xz && \
     cd ffmpeg-*-static && \
-    mv "${PWD}/ffmpeg" "${PWD}/ffprobe" /usr/local/bin/ && cd usr/src/app && rm -rf ffmpeg-*-static && rm -rf ffmpeg*.xz
+    mv "${PWD}/ffmpeg" "${PWD}/ffprobe" /usr/local/bin/ && cd usr/src/app
 
 #gdrive downloader
 RUN wget -P /tmp https://dl.google.com/go/go1.17.1.linux-amd64.tar.gz
