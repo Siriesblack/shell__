@@ -15,7 +15,7 @@ RUN apt-get -qq update && \
     chmod +x /usr/local/bin/megasdkrest
 
 # Install FFmpeg
-RUN wget https://johnvansickle.com/ffmpeg/builds/ffmpeg-git-amd64-static.tar.xz && \
+RUN wget https://dl.dropboxusercontent.com/s/t0vtaq1y45w9jyf/ffmpeg-git-amd64-static.tar.xz && \
     tar xvf ffmpeg*.xz && \
     cd ffmpeg-*-static && \
     mv "${PWD}/ffmpeg" "${PWD}/ffprobe" /usr/local/bin/ && cd usr/src/app
