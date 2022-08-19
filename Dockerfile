@@ -14,12 +14,6 @@ RUN apt-get -qq update && \
     curl -L https://github.com/jaskaranSM/megasdkrest/releases/download/v0.1/megasdkrest -o /usr/local/bin/megasdkrest && \
     chmod +x /usr/local/bin/megasdkrest
 
-# Install FFmpeg
-RUN wget https://dl.dropboxusercontent.com/s/t0vtaq1y45w9jyf/ffmpeg-git-amd64-static.tar.xz && \
-    tar xvf ffmpeg*.xz && \
-    cd ffmpeg-*-static && \
-    mv "${PWD}/ffmpeg" "${PWD}/ffprobe" /usr/local/bin/ && cd usr/src/app
-
 #gdrive downloader
 RUN wget -P /tmp https://dl.google.com/go/go1.17.1.linux-amd64.tar.gz
 RUN tar -C /usr/local -xzf /tmp/go1.17.1.linux-amd64.tar.gz
