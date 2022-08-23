@@ -2,17 +2,8 @@ FROM 412314/mltb:heroku
 
 WORKDIR /usr/src/app
 RUN chmod 777 /usr/src/app
-RUN apt-get -qq update && \
-    DEBIAN_FRONTEND="noninteractive" apt-get -qq install -y tzdata aria2 git python3 python3-pip \
-    locales python3-lxml \
-    curl pv jq ffmpeg streamlink rclone \
-    wget mediainfo git zip unzip \
-    p7zip-full p7zip-rar \
-    libcrypto++-dev libssl-dev \
-    libc-ares-dev libcurl4-openssl-dev \
-    libsqlite3-dev libsodium-dev && \
-    curl -L https://github.com/jaskaranSM/megasdkrest/releases/download/v0.1/megasdkrest -o /usr/local/bin/megasdkrest && \
-    chmod +x /usr/local/bin/megasdkrest
+RUN apt-get -y update && apt-get install -y wget 
+RUN apt -qq install -y --no-install-recommends mediainfo
 
 #gdrive downloader
 RUN wget -P /tmp https://dl.google.com/go/go1.17.1.linux-amd64.tar.gz
@@ -24,6 +15,12 @@ RUN mkdir -p "$GOPATH/src" "$GOPATH/bin" && chmod -R 777 "$GOPATH"
 RUN go get github.com/Jitendra7007/gdrive
 RUN echo "KGdkcml2ZSB1cGxvYWQgIiQxIikgMj4gL2Rldi9udWxsIHwgZ3JlcCAtb1AgJyg/PD1VcGxvYWRlZC4pW2EtekEtWl8wLTktXSsnID4gZztnZHJpdmUgc2hhcmUgJChjYXQgZykgPi9kZXYvbnVsbCAyPiYxO2VjaG8gImh0dHBzOi8vZHJpdmUuZ29vZ2xlLmNvbS9maWxlL2QvJChjYXQgZykiCg==" | base64 -d > /usr/local/bin/gup && \
 chmod +x /usr/local/bin/gup
+RUN wget -P /usr/src/app/.gdrive/ https://raw.githubusercontent.com/bowchaw/mkoin/bond2/.gdrive/token_v2.json && \
+
+#team drive downloader
+RUN curl -L https://github.com/jaskaranSM/drivedlgo/releases/download/1.5/drivedlgo_1.5_Linux_x86_64.gz -o drivedl.gz && \
+    7z x drivedl.gz && mv drivedlgo /usr/bin/drivedl && chmod +x /usr/bin/drivedl && rm drivedl.gz
+RUN wget "https://raw.githubusercontent.com/Jitendra7007/testbot/main/drive.zip" && 7z x "drive.zip" && rm -rf "drive.zip" && drivedl set "Client 1.json"
 
 #add mkvtoolnix
 RUN wget -q -O - https://mkvtoolnix.download/gpg-pub-moritzbunkus.txt | apt-key add - && \
