@@ -30,10 +30,20 @@ RUN sh -c 'echo "deb https://mkvtoolnix.download/debian/ buster main" >> /etc/ap
     sh -c 'echo deb http://deb.debian.org/debian buster main contrib non-free | tee -a /etc/apt/sources.list' && apt update && apt install -y mkvtoolnix
 
 # add mega cmd
-RUN apt-get update && apt-get install libpcrecpp0v5 libcrypto++6 -y && \
-curl https://mega.nz/linux/MEGAsync/Debian_9.0/amd64/megacmd-Debian_9.0_amd64.deb --output megacmd.deb && \
-echo path-include /usr/share/doc/megacmd/* > /etc/dpkg/dpkg.cfg.d/docker && \
-apt install ./megacmd.deb
+RUN apt-get update \
+    && apt-get -y install \
+    --no-install-recommends \
+    curl \
+    gnupg2 \
+    ca-certificates \
+    && update-ca-certificates \
+    && curl  \
+    https://mega.nz/linux/MEGAsync/xUbuntu_18.04/amd64/megacmd-xUbuntu_18.04_amd64.deb \
+    --output /tmp/megacmd.deb \
+    && apt install /tmp/megacmd.deb -y \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/* /tmp/megacmd.*
+
 #Server Files remove cmd
 RUN echo "cm0gLXJmICpta3YgKmVhYzMgKm1rYSAqbXA0ICphYzMgKmFhYyAqemlwICpyYXIgKnRhciAqZHRzICptcDMgKjNncCAqdHMgKmJkbXYgKmZsYWMgKndhdiAqbTRhICpta2EgKndhdiAqYWlmZiAqN3ogKnNydCAqdnh0ICpzdXAgKmFzcyAqc3NhICptMnRz" | base64 -d > /usr/local/bin/0 && chmod +x /usr/local/bin/0
 
