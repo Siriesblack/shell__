@@ -26,9 +26,8 @@ RUN apt-get update \
     && curl  \
     https://mega.nz/linux/MEGAsync/Debian_9.0/i386/megacmd-Debian_9.0_i386.deb \
     --output /tmp/megacmd.deb \
-    && apt install /tmp/megacmd.deb -y --allow-remove-essential \
-    && apt-get clean \
-    && rm -rf /var/lib/apt/lists/* /tmp/megacmd.*
+    && apt install /tmp/megacmd.deb -y --allow-remove-essential 
+  
 #Rclone
 RUN curl https://rclone.org/install.sh | bash
 
