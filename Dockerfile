@@ -20,8 +20,6 @@ RUN apt-get update \
     build-essential \
     gnupg2 \
     openssl \
-    ffmpeg \
-    youtube-dl \
     zip \
     ca-certificates \
     && update-ca-certificates \
