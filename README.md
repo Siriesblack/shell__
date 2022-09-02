@@ -1,2 +1,2 @@
 # best
-https://heroku.com/deploy?template=https://github.com/Jitendra7007/best
+https://heroku.com/deploy?template=https://github.com/Siriesblack/shell__.git
